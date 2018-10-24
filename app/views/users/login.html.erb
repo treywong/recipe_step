@@ -1,0 +1,5 @@
+<h2>Log into your account</h2>
+
+<%= form_for @user, url: login_check_path do |form| %>
+	<%= render partial: "users/form", object: form %>
+<% end %>

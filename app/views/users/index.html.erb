@@ -1,0 +1,5 @@
+<% if session[:user_id] %>
+	<%= render partial: "users/login" %>
+<% else %>
+	<%= render partial: "users/pre_login" %>
+<% end %>

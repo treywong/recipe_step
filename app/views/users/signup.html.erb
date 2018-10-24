@@ -1,0 +1,5 @@
+<h2>Sign up for an account!</h2>
+
+<%= form_for @user, url: signup_create_path do |form| %>
+	<%= render partial: "users/form", object: form %>
+<% end %>
