@@ -1,0 +1,8 @@
+<h1>Edit Your Recipe</h1>
+<%= form_for @recipe, url: recipe_edit_path do |form| %>
+	<%= render partial: '/recipe/form', object: form %>
+
+	<div class="submit-field">
+		<%= form.submit %>
+	</div>
+<% end %>

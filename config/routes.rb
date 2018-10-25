@@ -3,6 +3,13 @@ Rails.application.routes.draw do
   get 'users/index'
   root 'users#index'
 
+  resources :recipes, controller: "recipes"
+  get "/recipes/user/:id" => "recipes#user_recipe", as: "user_recipe"
+  get "/recipes/favourite/user/:id" => "recipes#favourite", as: "favourite_recipe"
+
+  get "/search" => "searches#_search", as: "searching"
+
+
   get "/login" => "users#login"
   get "/logout" => "users#logout"
   get "/signup" => "users#signup"

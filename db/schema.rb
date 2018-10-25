@@ -10,18 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_24_031947) do
+ActiveRecord::Schema.define(version: 2018_10_24_090641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "recipes", force: :cascade do |t|
-    t.string "tags", default: [], array: true
-    t.string "ingredients", default: [], array: true
-    t.string "steps", default: [], array: true
-    t.string "image"
+  create_table "favourites", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "recipe_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_favourites_on_recipe_id"
+    t.index ["user_id"], name: "index_favourites_on_user_id"
+  end
+
+  create_table "recipes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "name"
+    t.string "description"
+    t.string "cooktime"
+    t.string "tags", default: [], array: true
+    t.string "ingredients", default: [], array: true
+    t.string "instruction"
+    t.string "images", default: [], array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_recipes_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "recipe_id"
+    t.string "title"
+    t.integer "rating"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_reviews_on_recipe_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -29,6 +55,8 @@ ActiveRecord::Schema.define(version: 2018_10_24_031947) do
     t.string "email"
     t.string "password"
     t.string "password_digest"
+    t.string "role", default: "regular"
+    t.string "image_profile"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

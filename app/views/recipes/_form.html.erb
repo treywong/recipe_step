@@ -1,0 +1,41 @@
+<div class="text-field">
+	<%= form.label :name %>
+	<%= form.text_field :name %>
+</div>
+
+<div class="file-field">
+	<%= form.label :images %>
+	<p>Warning: Please seperate the images with commas</p>
+	<%= form.file_field :images %>
+</div>
+
+<div class="text-field">
+	<%= form.label :description %>
+	<%= form.text_area :description %>
+</div>
+
+<div class="text-field">
+	<%= form.label :cooktime %>
+	<%= form.text_field :cooktime %>
+</div>
+
+<div class="text-field">
+	<%= form.label :ingredients %>
+	<p>Warning: Please seperate the ingredients with commas</p>
+	<%= form.text_field :ingredients %>
+</div>
+
+<div class="text-field">
+	<%= form.label :instruction %>
+	<%= form.text_area :instruction %>
+</div>
+
+<div class="text-field">
+	<%= form.label :tags %>
+	<p>Warning: Please seperate the tags with commas</p>
+	<%= form.text_field :tags %>
+</div>
+
+<div class="submit-field">
+	<%= form.submit %>
+</div>

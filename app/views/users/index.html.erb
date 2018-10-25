@@ -1,5 +1,9 @@
-<% if session[:user_id] %>
-	<%= render partial: "users/login" %>
+
+
+<% if session[:user_id] and current_user.role == "regular" %>
+	<%= render partial: "users/regular" %>
+<% elsif session[:user_id] and current_user.role == "admin" %>
+	<%= render partial: "users/admin" %>
 <% else %>
 	<%= render partial: "users/pre_login" %>
 <% end %>

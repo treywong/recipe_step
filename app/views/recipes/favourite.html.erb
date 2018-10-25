@@ -1,0 +1,11 @@
+<h1>All your favourite recipes</h1>
+
+<% @recipe.each do |r| %>
+	<a href="/recipes/<%= r.id %>">
+		<h2><%= r.name %></h2>
+	</a>
+	<p>Created by: <%= r.user.username %></p>
+	<p>Overall rating: <%= Review.overall_rating(r.id) %> / 5</p>
+	<p><%= r.description %></p>
+	<p><%= r.created_at %></p>
+<% end %>
