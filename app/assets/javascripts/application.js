@@ -14,3 +14,27 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+function getEdamamRecipes(name) {
+	fetch('https://api.edamam.com/search?q=' + name +'&app_id=' + AppId + '&app_key=' + AppKey)
+		.then(function(response) {
+
+			if (!response.ok){
+				window.alert('Hey, seems like something went wrong, please email <email address> for reports!');
+				return;
+			}
+			return response.json();
+		})
+		.then(function(result) {
+
+			if (!result){
+				return;
+			}
+
+			const items = result.response;
+		})
+		.catch(function(err) {
+			window.alert('Hey, seems like the Edamam API is down, please try again later!')
+			console.log("Message: " + err)
+		})
+}

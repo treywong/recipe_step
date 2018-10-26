@@ -1,0 +1,12 @@
+<h1>All users in this platform</h1>
+
+<% @user.each do |u| %>
+	<a href="/user/<%= u.id %>">
+		<h2><%= u.username %></h2>
+	</a>
+	<h2><%= u.email %></h2>
+	<p>Join at: <%= u.created_at %></p>
+<% end %>
+
+<%= paginate @user %>
+<%= page_entries_info @user %>

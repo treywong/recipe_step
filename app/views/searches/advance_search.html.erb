@@ -1,0 +1,11 @@
+
+<div id="home">
+  <h2>Search For Recipes Using AJAX</h2>
+  <div id="search-div">
+    <%= form_tag advance_searching_path, id: "recipe-search", remote: true do %>
+      <%= label_tag "search" %>
+      <%= text_field_tag "name", nil, list: "list" %>
+      <datalist id="list"></datalist>
+    <% end %>
+  </div>
+</div>

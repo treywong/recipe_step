@@ -11,4 +11,18 @@ class SearchesController < ApplicationController
 	def index
 
 	end
+
+	def advance_search
+
+	end
+
+	def advance_searching
+		@recipe = Recipe.all
+		
+		@recipe = @recipe.names(params[:name]) if params[:name].present?
+	    respond_to do |format|
+	      format.json { render json: @recipe }
+	      format.js # remote: true is sent a js format and sends you to search.js.erb
+	    end
+	end
 end

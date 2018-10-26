@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
 	helper UsersHelper
-	
 
 	def signup
 		@user = User.new

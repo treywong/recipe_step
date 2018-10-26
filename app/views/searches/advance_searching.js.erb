@@ -1,0 +1,8 @@
+$("#list").html();
+<% @recipe.each do |r| %>
+  var recipe = document.createElement("recipe");
+  recipe.value = "<%= r %>";
+
+  //append option to list
+  $("#list").append(recipe);
+<% end %>

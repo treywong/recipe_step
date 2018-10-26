@@ -1,1 +1,8 @@
-_admin.html.erb
+
+<%= render partial: "searches/search" %>
+<%= link_to 'User Mangament', user_management_path %> |
+<%= link_to 'Browse for recipe', recipes_path %> |
+<%= link_to 'Your recipes', user_recipe_path(current_user.id) %> |
+<%= link_to 'Your favourites', favourite_recipe_path(current_user.id) %> |
+<%= link_to 'Your page', root_path %> |
+<%= link_to 'Log out', "/logout" %> |

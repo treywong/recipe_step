@@ -60,7 +60,7 @@ ActiveRecord::Base.transaction do
 	end
 
 	user['username'] = "Admin"
-	user["email"] = master@example.com
+	user["email"] = "master@example.com"
 	user["image_profile"] = Faker::Avatar.image
 	user['role'] = "admin"
 
