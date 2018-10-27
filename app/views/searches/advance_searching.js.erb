@@ -1,8 +1,13 @@
-$("#list").html();
+$("#list").html("");
+var first_option = document.createElement("option");
+first_option.innerHTML = "Select Here...";
+$("#list").append(first_option);
+
 <% @recipe.each do |r| %>
-  var recipe = document.createElement("recipe");
-  recipe.value = "<%= r %>";
+  var option = document.createElement("option");
+  option.value = '/recipes/<%= r.id %>';
+  option.innerHTML = "<%= r.name %> (<%= r.user.username %>)";
 
   //append option to list
-  $("#list").append(recipe);
+  $("#list").append(option);
 <% end %>

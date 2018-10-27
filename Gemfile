@@ -68,3 +68,5 @@ gem "faker", :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 gem 'kaminari'
 
 gem 'figaro'
+
+gem 'jquery-rails'

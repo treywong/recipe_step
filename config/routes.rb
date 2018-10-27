@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   get "/search" => "searches#_search", as: "searching"
   get "/advance_search" => "searches#advance_search"
-  post "/advance_searching" => "searches#advance_searching", as: "advance_searching"
+  post "/advance_searching" => "searches#advance_searching"
 
   get "/login" => "users#login"
   get "/logout" => "users#logout"
