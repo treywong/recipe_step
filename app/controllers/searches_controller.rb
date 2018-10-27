@@ -17,6 +17,7 @@ class SearchesController < ApplicationController
 	end
 
 	def advance_searching
+		@name = params[:name]
 		@recipe = Recipe.all
 		
 		@recipe = @recipe.names(params[:name]) if params[:name].present?

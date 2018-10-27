@@ -1,4 +1,5 @@
 $("#list").html("");
+$("#other-list").html("");
 var first_option = document.createElement("option");
 first_option.innerHTML = "Select Here...";
 $("#list").append(first_option);
@@ -11,3 +12,59 @@ $("#list").append(first_option);
   //append option to list
   $("#list").append(option);
 <% end %>
+
+
+// text input field
+
+getEdamamRecipes('<%= @name %>')
+
+function getEdamamRecipes(name) {
+	appId = '<%= ENV['EDAMAM_APP_ID'] %>'
+	appKey = '<%= ENV['EDAMAM_APP_KEY'] %>'
+	fetch('https://api.edamam.com/search?q=' + name +'&app_id=' + appId + '&app_key=' + appKey)
+	.then(function(response) {
+
+		if (!response.ok){
+			window.alert('Hey, seems like something went wrong, please email <email address> for reports!');
+			return;
+		}
+		return response.json();
+	})
+	.then(function(result) {
+
+		if (!result){
+			return;
+		}
+		const data = result.hits;
+
+		var source = document.createElement("h2");
+		source.innerHTML = "With Edamam help,";
+		$("#other-list").append(source);
+
+		data.forEach(function(element) {
+			let item = element.recipe;
+
+			let recipe = document.createElement('div');
+			let recipeName = document.createElement('h3');
+			let recipeLink = document.createElement('a');
+			let recipeAuthor = document.createElement('p');
+
+			recipeName.innerHTML = item.label;
+			recipeLink.setAttribute('href', item.url );
+			recipeLink.appendChild(recipeName);
+
+			recipeAuthor.innerHTML = "By: " + item.source;
+
+			recipe.appendChild(recipeLink)
+			recipe.appendChild(recipeAuthor)
+
+			$("#other-list").append(recipe);
+			$("#other-list").append("<hr>");
+
+		})
+	})
+	.catch(function(err) {
+		window.alert('Hey, seems like the Edamam API is down, please try again later!')
+		console.log("Message: " + err)
+	})
+}
