@@ -1,11 +1,15 @@
 <h1><%= @user.username %> recipes</h1>
 
+<% if current_user.id == @user.id %>
+	<%= link_to 'Create a new recipe', new_recipe_path %>
+<% end %>
+<br>
 <% @recipe.each do |r| %>
 	<a href="/recipes/<%= r.id %>">
 		<h2><%= r.name %></h2>
 	</a>
 	<p>Overall rating: <%= Review.overall_rating(r.id) %> / 5</p>
-	<p><%= r.description %></p>
+	<p><%= sanitize r.description %></p>
 	<p><%= r.created_at %></p>
 <% end %>
 

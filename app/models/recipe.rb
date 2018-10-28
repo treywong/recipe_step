@@ -4,5 +4,9 @@ class Recipe < ApplicationRecord
 	has_many :reviews
 
 	scope :names, -> (name) { where("name ILIKE ?", "%#{name}%")}
-	# scope :tags, -> (tag) { where("tags include ?", "%#{tag}%") }
+
+	validates :name, presence: true
+	validates :cooktime, presence: true
+	validates :ingredients, presence: true
+	validates :tags, presence: true
 end

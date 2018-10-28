@@ -4,8 +4,12 @@ Rails.application.routes.draw do
   root 'users#index'
 
   resources :recipes, controller: "recipes"
+   get "/users/:id" => "users#show"
   get "/recipes/user/:id" => "recipes#user_recipe", as: "user_recipe"
   get "/recipes/favourite/user/:id" => "recipes#favourite", as: "favourite_recipe"
+  post "/favourite/:id" => "recipes#favourite_new", as: "favourite_new"
+  delete "/favourite/:id" => "recipes#favourite_destroy", as: "favourite_destroy"
+  delete "/recipes/:id" => "recipes#destroy", as: "destroy_recipe"
 
   get "/search" => "searches#_search", as: "searching"
   get "/advance_search" => "searches#advance_search"
@@ -17,5 +21,6 @@ Rails.application.routes.draw do
   post "/login" => "users#login_check", as: "login_check"
   post "/signup" => "users#signup_create", as: "signup_create"
 
-  get "/admin/user_management" => "admin#user_management", as: "user_management"
+  get "/admin/user_management" => "admins#user_management", as: "user_management"
+  delete "/users/:id" => "admins#user_delete", as: "user_delete"
 end

@@ -6,10 +6,13 @@ class RecipesController < ApplicationController
 	def create
 		@recipe = Recipe.new(recipe_params)
 		@recipe.ingredients = params[:recipe][:ingredients].split(",")
-		@recipe.user_id = current_user.id
-		@recipe.save
-
-		redirect_to root_path
+		@recipe.tags = params[:recipe][:tags].split(",")
+		@recipe.user_id = session[:user_id]
+		if @recipe.save
+			redirect_to user_recipe_path(session[:user_id])
+		else
+			redirect_to root_path
+		end
 	end
 
 	def show
@@ -28,20 +31,36 @@ class RecipesController < ApplicationController
 	def update
 		@recipe = Recipe.find_by(id: params[:id])
 		@recipe.update(recipe_params)
+		@recipe.ingredients = params[:recipe][:ingredients].split(",")
+		@recipe.tags = params[:recipe][:tags].split(",")
 		@recipe.save
 
-		redirect_to "/recipe/#{params[:id]}"
+		redirect_to "/recipes/#{params[:id]}"
 	end
 
 	def delete
 		@recipe = Recipe.find_by(id: params[:id])
 		@recipe.destroy
-		redirect_to root_path
+		redirect_to user_recipe_path(session[:user_id])
 	end
 
 	def user_recipe
 		@user = User.find_by(id: params[:id])
 		@recipe = Recipe.all.where(user_id: params[:id]).order(:created_at).page params[:page]
+	end
+
+	def favourite_new
+		@favourite = Favourite.new(recipe_id: params[:id], user_id: session[:user_id])
+		@favourite.save
+
+		redirect_to "/recipes/#{params[:id]}"
+	end
+
+	def favourite_destroy
+		@favourite = Favourite.find_by(recipe_id: params[:id], user_id: session[:user_id])
+		@favourite.destroy
+
+		redirect_to "/recipes/#{params[:id]}"
 	end
 
 	def favourite

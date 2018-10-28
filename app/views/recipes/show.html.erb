@@ -1,4 +1,15 @@
 <h1><%= @recipe.name %></h1>
+<% if current_user.id == @recipe.user_id %>
+	<%= link_to 'Edit', edit_recipe_path(@recipe.id) %>
+	<%= link_to 'Delete', destroy_recipe_path(@recipe.id), method: :delete, data: {confirm: "Are you sure?" } %>
+<% else %>
+	<% if Favourite.find_by(recipe_id: @recipe.id, user_id: current_user.id) %>
+		<%= link_to 'Unfollow', favourite_destroy_path(@recipe.id), method: :delete, data: {confirm: "Are you sure?" } %>
+	<% else %>
+		<%= link_to 'Follow', favourite_new_path(@recipe.id), method: "post" %>
+	<% end %>
+<% end %>
+
 <p>Overall rating: <%= Review.overall_rating(@recipe.id) %> / 5</p>
 <p>Estimated cook time: <%= @recipe.cooktime %></p>
 <% @recipe.images.each do |image| %>

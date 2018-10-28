@@ -9,7 +9,7 @@ user = {}
 recipe = {}
 favourite = {}
 review = {}
-user['password'] = 'asdf'
+user['password'] = 'infinite'
 
 ActiveRecord::Base.transaction do
 	50.times do

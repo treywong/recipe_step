@@ -1,6 +1,15 @@
 class UsersController < ApplicationController
 	helper UsersHelper
 
+	def index
+	end
+
+	def show
+		@user = User.find_by(id: params[:id])
+	end
+
+	
+
 	def signup
 		@user = User.new
 	end
@@ -9,6 +18,8 @@ class UsersController < ApplicationController
 		@user = User.new(user_params)
 		if @user.save
 			redirect_to root_path
+		else
+			redirect_to "/signup"
 		end
 	end
 
@@ -22,7 +33,7 @@ class UsersController < ApplicationController
 			session[:user_id] = @user.id
 			redirect_to root_path
 		else
-			redirect_back(fallback_location: root_path)
+			redirect_to "/login"
 		end
 	end
 

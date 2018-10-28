@@ -1,11 +1,15 @@
 <h1>All users in this platform</h1>
 
 <% @user.each do |u| %>
-	<a href="/user/<%= u.id %>">
+	<a href="/users/<%= u.id %>">
 		<h2><%= u.username %></h2>
 	</a>
+	<% if current_user.role == "admin" %>
+		<%= link_to 'Delete', user_delete_path(u.id), method: :delete, data: {confirm: "Are you sure?" } %>
+	<% end %>
 	<h2><%= u.email %></h2>
 	<p>Join at: <%= u.created_at %></p>
+	<hr>
 <% end %>
 
 <%= paginate @user %>

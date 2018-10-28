@@ -6,7 +6,7 @@
 	</a>
 	<p>Created by: <%= r.user.username %></p>
 	<p>Overall rating: <%= Review.overall_rating(r.id) %> / 5</p>
-	<p><%= r.description %></p>
+	<p><%= sanitize r.description %></p>
 	<p><%= r.created_at %></p>
 <% end %>
 
