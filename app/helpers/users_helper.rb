@@ -1,7 +1,7 @@
 module UsersHelper
 	def current_user
-		if session[:user_id]
-			@current_user ||= User.find_by_id(session[:user_id])
+		if cookies[:auth_token]
+			@current_user ||= User.find_by_auth_token!(cookies[:auth_token]) if cookies[:auth_token]
 		end
 	end
 
@@ -10,11 +10,11 @@ module UsersHelper
 	end
 
 	def sign_in(user)
-		session[:user_id] = user.id
+		cookies[:auth_token] = user.auth_token
 	end
 
 	def sign_out
-		session[:user_id] = nil
+		cookies[:auth_token] = nil
 	end
 
 	def user_avatar user

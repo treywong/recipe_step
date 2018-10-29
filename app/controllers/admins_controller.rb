@@ -1,8 +1,6 @@
 class AdminsController < ApplicationController
-	helper AdminsHelper
-
 	def user_management
-		if User.find_by_id(session[:user_id]).role != 'admin'
+		if current_user.role != 'admin'
         	flash[:notice] = "Sorry. You are not allowed to perform this action."
         	return redirect_to root_path
       	end
@@ -10,7 +8,7 @@ class AdminsController < ApplicationController
 	end
 
 	def user_delete
-		if User.find_by_id(session[:user_id]).role != 'admin'
+		if current_user.role != 'admin'
         	flash[:notice] = "Sorry. You are not allowed to perform this action."
         	return redirect_to root_path
      	end

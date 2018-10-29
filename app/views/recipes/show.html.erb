@@ -11,6 +11,7 @@
 <% end %>
 
 <p>Overall rating: <%= Review.overall_rating(@recipe.id) %> / 5</p>
+<p>Favourites: <%= @recipe.favourites_count %></p>
 <p>Estimated cook time: <%= @recipe.cooktime %></p>
 <% @recipe.images.each do |image| %>
 	<%= image_tag image %>

@@ -1,14 +1,10 @@
 class UsersController < ApplicationController
-	helper UsersHelper
-
 	def index
 	end
 
 	def show
 		@user = User.find_by(id: params[:id])
 	end
-
-	
 
 	def signup
 		@user = User.new
@@ -30,7 +26,11 @@ class UsersController < ApplicationController
 	def login_check
 		@user = User.find_by(email: params[:user][:email])
 		if @user && @user.authenticate(params[:user][:password])
-			session[:user_id] = @user.id
+			if params[:remember_me]
+				cookies.permanent[:auth_token] = @user.auth_token
+			else
+				cookies[:auth_token] = @user.auth_token
+			end
 			redirect_to root_path
 		else
 			redirect_to "/login"
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
 	end
 
 	def logout
-		session[:user_id] = nil
+		cookies.delete(:auth_token)
 		@user = nil
 		redirect_to root_path
 	end

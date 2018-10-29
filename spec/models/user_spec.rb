@@ -32,6 +32,20 @@ RSpec.describe User, type: :model do
 			expect( User.find_by(email: proper_email ) ).to be nil
 		end
 	end
+
+	context "recipes_count: " do
+		it "count all the recipe created by the user" do
+			user = User.create(email: proper_email, password: proper_password )
+			recipe = Recipe.create(name: "Food_1" , cooktime: "30 min" , ingredients: ['ham', 'cheese', 'bread'] , tags: ['sandwich'], user_id: user.id )
+			expect( user.recipes_count ).to eql(1)
+		end
+
+		it "won't count all the recipe created by the user that are invalid" do
+			user = User.create(email: proper_email, password: proper_password )
+			recipe = Recipe.create(name: "Food_1", user_id: user.id )
+			expect( user.recipes_count ).to eql(0)
+		end
+	end
 end
 
 # 11 errors

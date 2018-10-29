@@ -7,9 +7,9 @@ class RecipesController < ApplicationController
 		@recipe = Recipe.new(recipe_params)
 		@recipe.ingredients = params[:recipe][:ingredients].split(",")
 		@recipe.tags = params[:recipe][:tags].split(",")
-		@recipe.user_id = session[:user_id]
+		@recipe.user_id = current_user.id
 		if @recipe.save
-			redirect_to user_recipe_path(session[:user_id])
+			redirect_to user_recipe_path(current_user.id)
 		else
 			redirect_to root_path
 		end
@@ -41,7 +41,7 @@ class RecipesController < ApplicationController
 	def delete
 		@recipe = Recipe.find_by(id: params[:id])
 		@recipe.destroy
-		redirect_to user_recipe_path(session[:user_id])
+		redirect_to user_recipe_path(current_user.id)
 	end
 
 	def user_recipe
@@ -50,14 +50,14 @@ class RecipesController < ApplicationController
 	end
 
 	def favourite_new
-		@favourite = Favourite.new(recipe_id: params[:id], user_id: session[:user_id])
+		@favourite = Favourite.new(recipe_id: params[:id], user_id: current_user.id)
 		@favourite.save
 
 		redirect_to "/recipes/#{params[:id]}"
 	end
 
 	def favourite_destroy
-		@favourite = Favourite.find_by(recipe_id: params[:id], user_id: session[:user_id])
+		@favourite = Favourite.find_by(recipe_id: params[:id], user_id: current_user.id)
 		@favourite.destroy
 
 		redirect_to "/recipes/#{params[:id]}"

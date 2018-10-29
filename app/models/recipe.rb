@@ -9,4 +9,9 @@ class Recipe < ApplicationRecord
 	validates :cooktime, presence: true
 	validates :ingredients, presence: true
 	validates :tags, presence: true
+
+	def favourites_count
+		favourites = Favourite.all.where(recipe_id: self.id)
+		return favourites.count
+	end
 end
