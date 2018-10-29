@@ -19,9 +19,7 @@ $("#list").append(first_option);
 getEdamamRecipes('<%= @name %>')
 
 function getEdamamRecipes(name) {
-	appId = '<%= ENV['EDAMAM_APP_ID'] %>'
-	appKey = '<%= ENV['EDAMAM_APP_KEY'] %>'
-	fetch('https://api.edamam.com/search?q=' + name +'&app_id=' + appId + '&app_key=' + appKey)
+	fetch('https://api.edamam.com/search?q=' + name +'&app_id=<%= ENV['EDAMAM_APP_ID'] %>&app_key=<%= ENV['EDAMAM_APP_KEY'] %>')
 	.then(function(response) {
 
 		if (!response.ok){

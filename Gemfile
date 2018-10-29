@@ -85,3 +85,5 @@ gem 'figaro'
 gem 'jquery-rails'
 
 gem 'trix'
+
+gem 'rails_12factor', group: :production
