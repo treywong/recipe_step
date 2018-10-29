@@ -10,8 +10,10 @@
   </head>
 
   <body>
-    <% if session[:user_id] %>
-      <%= render partial: "navbar/login" %>
+    <% if cookies[:auth_token] and current_user.role == "regular" %>
+      <%= render partial: "navbar/regular" %>
+    <% elsif cookies[:auth_token] and current_user.role == "admin" %>
+      <%= render partial: "navbar/admin" %>
     <% else %>
       <%= render partial: "navbar/pre_login" %>
     <% end %>

@@ -1,0 +1,4 @@
+<h1>Edit Your Recipe</h1>
+<%= form_for @recipe, url: {controller: "recipes", action: "update", method: "pput" } do |form| %>
+	<%= render partial: '/recipes/form', object: form %>
+<% end %>

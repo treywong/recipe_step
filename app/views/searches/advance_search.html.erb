@@ -1,0 +1,17 @@
+
+<div id="home">
+  <h2>Search For Recipes Using AJAX</h2>
+  <div id="search-div">
+    <%= form_tag advance_searching_path, id: "recipe-search", remote: true do %>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <%= label_tag "search" %>
+      <%= text_field_tag "name", nil, list: "list", placeholder: 'Enter search term...' %>
+      <select id="list" onchange="if (this.value) window.location.href=this.value">
+      	<option>Select Here...</option>
+      </select>
+    <% end %>
+  </div>
+</div>
+
+<h2>Or other search result:</h2>
+<div id="other-list"></div>

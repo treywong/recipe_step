@@ -58,5 +58,30 @@ group :test do
   gem 'chromedriver-helper'
 end
 
+group :development, :test do
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'guard-puma'
+  gem 'rspec'
+  gem 'rspec-rails', '~> 3.8'
+  gem 'rspec-given'
+  gem 'shoulda-matchers'
+  gem 'factory_girl_rails'
+  gem 'shoulda-callback-matchers'
+  gem 'rails-controller-testing'
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+
+# Gems added in
+gem "faker", :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+
+gem 'kaminari'
+
+gem 'figaro'
+
+gem 'jquery-rails'
+
+gem 'trix'

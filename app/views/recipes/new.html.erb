@@ -1,0 +1,4 @@
+<h1>Add Your Recipe</h1>
+<%= form_for @recipe, url: {controller: "recipes", action: "create", method: "post" } do |form| %>
+	<%= render partial: '/recipes/form', object: form %>
+<% end %>

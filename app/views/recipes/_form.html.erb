@@ -1,0 +1,49 @@
+<div class="text-field">
+	<%= form.label :name %>
+	<%= form.text_field :name %>
+</div>
+<br>
+
+<div class="file-field">
+	<%= form.label :images %>
+	
+	<%= form.file_field :images %>
+</div>
+<br>
+
+<div class="text-field">
+	<%= form.label :description %>
+	<input id="recipe_description" type="hidden" value="<%= @recipe.description %>" name="recipe[description]">
+  	<trix-editor input="recipe_description"></trix-editor>
+</div>
+<br>
+
+<div class="text-field">
+	<%= form.label :cooktime %>
+	<%= form.text_field :cooktime %>
+</div>
+<br>
+
+<div class="text-field">
+	<%= form.label :ingredients %>
+	<%= form.text_field :ingredients %>
+	<p>Warning: Please seperate the ingredients with commas</p>
+</div>
+<br>
+
+<div class="text-field">
+	<%= form.label :instruction %>
+	<input id="recipe_instruction" type="hidden" value="<%= @recipe.instruction %>" name="recipe[instruction]">
+  <trix-editor input="recipe_instruction"></trix-editor>
+</div>
+<br>
+
+<div class="text-field">
+	<%= form.label :tags %>
+	<%= form.text_field :tags %>
+	<p>Warning: Please seperate the tags with commas</p>
+</div>
+
+<div class="submit-field">
+	<%= form.submit %>
+</div>
