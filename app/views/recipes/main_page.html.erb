@@ -1,26 +1,32 @@
 
 <div class="card-deck">
-  <% 8.times do %>
-    <% @r = Recipe.find_by(id: @recipe_ids[rand(@recipe_ids.length - 1)])  %>
-    <div class="col-md-3 mt-3">
-      <a href="/recipes/<%= @r.id %>" class="custom-card">
-        <div class="card">
-          <img class="card-img-top" src="<%= @r.images %>" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title"><%= @r.name %></h5>
-          </div>
-          <div class="card-footer">
-            <% (@r.overall_rate).to_i.times do %>
-              <span class="fa fa-star checked"></span>
-            <% end %>
-            <% (5 - @r.overall_rate).to_i.times do %>
-              <span class="fa fa-star"></span>
-            <% end %>
-          </div>
-        </div>
-      </a>
+  <% if Recipe.all == nil %>
+    <div class="card width_90 border-primary">
+      <p class="text-muted">There's no recipe in this site yet.</p>
     </div>
-    <% @recipe_ids.delete(@r.id) %>
+  <% else %>
+    <% 0.upto(8) do %>
+      <% @r = Recipe.find_by(id: @recipe_ids[rand(@recipe_ids.length - 1)])  %>
+      <div class="col-md-3 mt-3">
+        <a href="/recipes/<%= @r.id %>" class="custom-card">
+          <div class="card">
+            <img class="card-img-top" src="<%= @r.images %>" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"><%= @r.name %></h5>
+            </div>
+            <div class="card-footer">
+              <% (@r.overall_rate).to_i.times do %>
+                <span class="fa fa-star checked"></span>
+              <% end %>
+              <% (5 - @r.overall_rate).to_i.times do %>
+                <span class="fa fa-star"></span>
+              <% end %>
+            </div>
+          </div>
+        </a>
+      </div>
+      <% @recipe_ids.delete(@r.id) %>
+    <% end %>
   <% end %>
 </div>
 
