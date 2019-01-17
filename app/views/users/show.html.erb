@@ -29,7 +29,7 @@
 								<div class="card border-white">
 									<div class="card-body">
 										<a href="/recipes/<%= r.id %>"><h2 class="card-title"><%= r.name %></h2></a>
-										<p class="card-text">Overall rating: <%= r.overall_rate %> / 5</p>
+										<p class="card-text">Overall rating: <%= Review.overall_rating(r.id) %> / 5</p>
 										<p class="card-text"><%= sanitize r.description %></p>
 									</div>
 								</div>
@@ -66,7 +66,7 @@
 								<div class="card border-white">
 									<div class="card-body">
 										<a href="/recipes/<%= f.id %>"><h2 class="card-title"><%= f.name %> (<%= f.user.username %>) </h2></a>
-										<p class="card-text">Overall rating: <%= f.overall_rate %> / 5</p>
+										<p class="card-text">Overall rating: <%= Review.overall_rating(f.id) %> / 5</p>
 										<p class="card-text"><%= sanitize f.description %></p>
 									</div>
 								</div>

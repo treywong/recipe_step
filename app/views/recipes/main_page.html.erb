@@ -11,10 +11,10 @@
               <h5 class="card-title"><%= @r.name %></h5>
             </div>
             <div class="card-footer">
-              <% (@r.overall_rate).to_i.times do %>
+              <% (Review.overall_rating(@r.id)).to_i.times do %>
                 <span class="fa fa-star checked"></span>
               <% end %>
-              <% (5 - @r.overall_rate).to_i.times do %>
+              <% (5 - Review.overall_rating(@r.id)).to_i.times do %>
                 <span class="fa fa-star"></span>
               <% end %>
             </div>

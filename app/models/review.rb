@@ -2,24 +2,6 @@ class Review < ApplicationRecord
 	belongs_to :user
 	belongs_to :recipe
 
-	after_create do |review|
-		@recipe = Recipe.find_by(id: review.recipe_id)
-		@recipe.overall_rate = Review.overall_rating(review.recipe_id)
-		@recipe.save
-	end
-
-	after_update do |review|
-		@recipe = Recipe.find_by(id: review.recipe_id)
-		@recipe.overall_rate = Review.overall_rating(review.recipe_id)
-		@recipe.save
-	end
-
-	after_destroy do |review|
-		@recipe = Recipe.find_by(id: review.recipe_id)
-		@recipe.overall_rate = Review.overall_rating(review.recipe_id)
-		@recipe.save
-	end
-
 	def self.overall_rating(recipe_id)
 		@review = Review.all.where(recipe_id: recipe_id)
 

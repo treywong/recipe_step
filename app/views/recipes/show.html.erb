@@ -13,7 +13,7 @@
 		<% end %>
 	<% end %>
 
-	<p>Overall rating: <%= @recipe.overall_rate %> / 5</p>
+	<p>Overall rating: <%= Review.overall_rating(@recipe.id) %> / 5</p>
 	<p>Favourites: <%= @recipe.favourites_count %></p>
 	<p>Estimated cook time: <%= @recipe.cooktime %></p>
 	<% if @recipe.images %>

@@ -8,7 +8,6 @@ class RecipesController < ApplicationController
 		@recipe.ingredients = params[:recipe][:ingredients].split(",")
 		@recipe.tags = params[:recipe][:tags].split(",")
 		@recipe.user_id = current_user.id
-		@recipe.overall_rate = 0
 		if @recipe.save
 			redirect_to user_recipe_path(current_user.id)
 		else
