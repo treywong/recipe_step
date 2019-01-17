@@ -1,12 +1,8 @@
 
 <div class="card-deck">
-  <% if Recipe.all == nil %>
-    <div class="card width_90 border-primary">
-      <p class="text-muted">There's no recipe in this site yet.</p>
-    </div>
-  <% else %>
-    <% 0.upto(8) do %>
-      <% @r = Recipe.find_by(id: @recipe_ids[rand(@recipe_ids.length - 1)])  %>
+  <% 8.times do %>
+    <% @r = Recipe.find_by(id: @recipe_ids[rand(@recipe_ids.length - 1)])  %>
+    <% unless @r == nil %>
       <div class="col-md-3 mt-3">
         <a href="/recipes/<%= @r.id %>" class="custom-card">
           <div class="card">
