@@ -9,7 +9,7 @@ class CreateRecipes < ActiveRecord::Migration[5.2]
     	t.string :ingredients, array: true, default: []
     	t.string :instruction
     	t.string :images
-      t.integer :overall_rate
+      
       t.timestamps
     end
   end
