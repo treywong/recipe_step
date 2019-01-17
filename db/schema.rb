@@ -32,7 +32,8 @@ ActiveRecord::Schema.define(version: 2018_10_28_152856) do
     t.string "tags", default: [], array: true
     t.string "ingredients", default: [], array: true
     t.string "instruction"
-    t.string "images", default: [], array: true
+    t.string "images"
+    t.integer "overall_rate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_recipes_on_user_id"

@@ -1,4 +1,8 @@
-<h1>Edit Your Recipe</h1>
-<%= form_for @recipe, url: {controller: "recipes", action: "update", method: "pput" } do |form| %>
-	<%= render partial: '/recipes/form', object: form %>
-<% end %>
+<div class="card width_90 title_card border-primary">
+	<h1>Edit Your Recipe</h1>
+</div>
+<div class="card width_90 border-primary">
+	<%= form_for @recipe, url: {controller: "recipes", action: "update", method: "put" } do |form| %>
+		<%= render partial: '/recipes/form', object: form %>
+	<% end %>
+</div>

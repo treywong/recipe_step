@@ -1,3 +1,85 @@
-<h1><%= @user.username %></h1>
 
-<p><%= @user.username %> has <%= @user.recipes_count %> recipes. </p>
+<div class="card width_90">
+	<!-- User Info -->
+	<% if current_user.id == @user.id %>
+		<h1>Welcome, <%= @user.username %>!</h1>
+	<% else %>
+		<h1>Welcome to <%= @user.username %> page</h1>
+	<% end %>
+	<%= user_avatar @user %>
+</div>
+
+<br>
+
+	<!-- User Recipe -->
+<div class="card width_90">
+	<a href="<%= user_recipe_path(params[:id]) %>"><h1>Recipes (<%= @recipe_ids.count %>)</h1></a>
+	<% if @recipe_ids.count == 0 %>
+		<div class="card card_box border-primary">
+			<p class="text-muted">This user has no recipes.</p>
+		</div>
+	<% else %>
+		<% 3.times do %>
+			<% if @recipe_ids.count > 0 %>
+				<% r = Recipe.find_by(id: @recipe_ids[0]) %>
+				<hr>
+				<div class="card card_box border-white">
+					<div class="row">
+						<div class="col-md-8">
+								<div class="card border-white">
+									<div class="card-body">
+										<a href="/recipes/<%= r.id %>"><h2 class="card-title"><%= r.name %></h2></a>
+										<p class="card-text">Overall rating: <%= r.overall_rate %> / 5</p>
+										<p class="card-text"><%= sanitize r.description %></p>
+									</div>
+								</div>
+						</div>
+						<div class="col-md-4">
+							<div class="card">
+								<img class="img-thumbnail pull-right" src="<%= r.images %>">
+							</div>
+						</div>
+					</div>
+				</div>
+				<% @recipe_ids.shift %>
+			<% end %>
+		<% end %>
+	<% end %>
+</div>
+<br>
+
+	<!-- User Favourites -->
+<div class="card width_90">
+	<a href="<%= favourite_recipe_path(params[:id]) %>"><h1>Favourites (<%= @favourite_ids.count %>)</h1></a>
+	<% if @favourite_ids.count == 0 %>
+		<div class="card card_box border-primary">
+			<p class="text-muted">This user has no favourite recipes.</p>
+		</div>
+	<% else %>
+		<% 3.times do %>
+			<% if @favourite_ids.count > 0 %>
+				<% f = Favourite.find_by(id: @favourite_ids[0]).recipe %>
+				<hr>
+				<div class="card card_box border-white">
+					<div class="row">
+						<div class="col-md-8">
+								<div class="card border-white">
+									<div class="card-body">
+										<a href="/recipes/<%= f.id %>"><h2 class="card-title"><%= f.name %> (<%= f.user.username %>) </h2></a>
+										<p class="card-text">Overall rating: <%= f.overall_rate %> / 5</p>
+										<p class="card-text"><%= sanitize f.description %></p>
+									</div>
+								</div>
+						</div>
+						<div class="col-md-4">
+							<div class="card">
+								<img class="img-thumbnail pull-right" src="<%= f.images %>">
+							</div>
+						</div>
+					</div>
+				</div>
+				<% @favourite_ids.shift %>
+			<% end %>
+		<% end %>
+	<% end %>
+</div>

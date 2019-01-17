@@ -1,17 +1,39 @@
-<h1><%= @user.username %> recipes</h1>
+<div class="card width_90 title_card border-primary">
+	<h1><%= @user.username %> recipes</h1>
+</div>
 
 <% if current_user.id == @user.id %>
-	<%= link_to 'Create a new recipe', new_recipe_path %>
-<% end %>
-<br>
-<% @recipe.each do |r| %>
-	<a href="/recipes/<%= r.id %>">
-		<h2><%= r.name %></h2>
-	</a>
-	<p>Overall rating: <%= Review.overall_rating(r.id) %> / 5</p>
-	<p><%= sanitize r.description %></p>
-	<p><%= r.created_at %></p>
+	<div class="card width_90 title_card border-primary">
+		<%= link_to 'Create a new recipe', new_recipe_path %>
+	</div>
 <% end %>
 
-<%= paginate @recipe %>
-<%= page_entries_info @recipe %>
+<% @recipe.each do |r| %>
+	<a href="/recipes/<%= r.id %>" class="custom-card">
+		<div class="card card_box border-primary">
+			<div class="row">
+				<div class="col-md-8">
+					<div class="card border-white">
+						<div class="card-body">
+							<h2 class="card-title"><%= r.name %></h2>
+							<p class="card-text">Created by: <%= r.user.username %></p>
+							<p class="card-text">Overall rating: <%= r.overall_rate %> / 5</p>
+							<p class="card-text"><%= sanitize r.description %></p>
+							<p class="card-text">Last edited: <%= r.created_at.strftime("%Y-%m-%d") %></p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="card">
+						<img class="img-thumbnail pull-right" src="<%= r.images %>">
+					</div>
+				</div>
+			</div>
+		</div>
+	</a>
+<% end %>
+
+<div class="pages text-center">
+	<%= paginate @recipe %>
+	<%= page_entries_info @recipe %>
+</div>

@@ -27,6 +27,8 @@ ActiveRecord::Base.transaction do
 		recipe['description'] = Faker::Food.description
 		recipe['cooktime'] = rand(0..12).to_s + " hour " + rand(0..59).to_s + " min"
 		recipe['instruction'] = Faker::Hipster.paragraph
+		recipe['images'] = Faker::Avatar.image
+		recipe['overall_rate'] = 0
 	
 		recipe['ingredients'] = []
 		rand(5..10).times do
@@ -59,6 +61,11 @@ ActiveRecord::Base.transaction do
 		Review.create(review)
 	end
 
+	recipe_ids.each do |r|
+		Recipe.find_by(id: r).overall_rate = Review.overall_rating(r)
+	end
+
+	# create an Admin that controls the site
 	user['username'] = "Admin"
 	user["email"] = "master@example.com"
 	user["image_profile"] = Faker::Avatar.image

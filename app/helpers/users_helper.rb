@@ -19,10 +19,10 @@ module UsersHelper
 
 	def user_avatar user
 	  if user.image_profile.present?
-	    image_tag user.image_profile
+	    image_tag user.image_profile, class: "rounded float-right"
 	  else
 	    # Assuming you have a default.jpg in your assets folder
-	    image_tag 'empty_profile.jpeg'
+	    image_tag 'empty_profile.jpeg', class: "rounded float-right",  height: "200", width: "200"
 	  end
 	end
 end

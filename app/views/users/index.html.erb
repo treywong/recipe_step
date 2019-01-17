@@ -1,9 +1,0 @@
-
-
-<% if cookies[:auth_token] and current_user.role == "regular" %>
-	<%= render partial: "users/regular" %>
-<% elsif cookies[:auth_token] and current_user.role == "admin" %>
-	<%= render partial: "users/admin" %>
-<% else %>
-	<%= render partial: "users/pre_login" %>
-<% end %>

@@ -1,0 +1,9 @@
+<div class="card width_90 title_card border-primary">
+	<h1>Edit your review</h1>
+</div>
+
+<div class="card width_90 border-primary">
+	<%= form_for @review, url: {controller: "reviews", action: "update", method: "put" } do |form| %>
+		<%= render partial: '/reviews/form', object: form %>
+	<% end %>
+</div>

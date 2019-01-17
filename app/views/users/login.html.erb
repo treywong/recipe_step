@@ -1,22 +1,24 @@
-<h2>Log into your account</h2>
+<div class="card width_90 title_card border-primary">
+  <h2>Log into your account</h2>
+</div>
 
-<%= form_for @user, url: login_check_path do |form| %>
-  <div class="text-field">
-    <%= form.label :email %>
-    <%= form.text_field :email, type: 'email' %>
-  </div>
+<div class="card width_90 title_card border-primary">
+  <%= form_for @user, url: login_check_path do |form| %>
+    <div class="form-group">
+      <%= form.label :email %>
+      <%= form.text_field :email, type: 'email',  class: "form-control" %>
+    </div>
 
-  <div class="password-field">
-    <%= form.label :password %>
-    <%= form.password_field :password %>
-  </div>
+    <div class="form-group">
+      <%= form.label :password %>
+      <%= form.password_field :password,  class: "form-control"  %>
+    </div>
 
-  <div>
-    <%= form.label :remember_me %>
-    <%= check_box_tag :remember_me, 1, params[:remember_me] %>
-  </div>
+    <div class="form-group form-check">
+      <%= check_box_tag :remember_me, 1, params[:remember_me] %>
+      <%= form.label :remember_me %>
+    </div>
 
-  <div class="submit-field">
-    <%= form.submit 'Sign in' %>
-  </div>
-<% end %>
+    <%= form.submit 'Sign in', class: "btn btn-primary" %>
+  <% end %>
+</div>

@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
-	def index
-	end
-
 	def show
 		@user = User.find_by(id: params[:id])
+		@recipe_ids = Recipe.all.where(user_id: params[:id]).ids
+		@favourite_ids = Favourite.all.where(user_id: params[:id]).ids
 	end
 
 	def signup

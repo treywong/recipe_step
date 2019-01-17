@@ -1,8 +1,13 @@
 
+<div class="nav-item dropdown">
+	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Your Page
+    </a>
+	<div class="dropdown-menu" role="menu" aria-labelledby="navbarDropdownMenuLink">
+		<a class="dropdown-item" href="<%= user_page_path(current_user.id) %>">Your account</a>
+        <a class="dropdown-item" href="<%= user_recipe_path(current_user.id) %>">Your recipes</a>
+        <a class="dropdown-item" href="<%= favourite_recipe_path(current_user.id) %>">Your favourites</a>
+	</div>
+</div>
+<%= link_to 'Log out', "/logout", class: "nav-item nav-link active navbar-right " %>
 <%= render partial: "searches/search" %>
-<%= link_to 'All recipe', recipes_path %> |
-<%= link_to 'Browse for recipe', advance_search_path %> |
-<%= link_to 'Your recipes', user_recipe_path(current_user.id) %> |
-<%= link_to 'Your favourites', favourite_recipe_path(current_user.id) %> |
-<%= link_to 'Your page', root_path %> |
-<%= link_to 'Log out', "/logout" %> |

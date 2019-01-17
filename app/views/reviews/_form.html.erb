@@ -1,0 +1,28 @@
+<div class="text-field">
+	<%= form.label :title %>
+	<%= form.text_field :title %>
+</div>
+<br>
+
+<div class="text-field">
+	<%= form.label :rating %>
+	<select name="review[rating]">
+	  <option value="1">1</option>
+	  <option value="2">2</option>
+	  <option value="3">3</option>
+	  <option value="4">4</option>
+	  <option value="5">5</option>
+	</select>
+</div>
+<br>
+
+<div class="text-field">
+	<%= form.label :description %>
+	<input id="review_description" type="hidden" value="<%= @review.description %>" name="review[description]">
+  	<trix-editor input="review_description"></trix-editor>
+</div>
+<br>
+
+<div class="submit-field">
+	<%= form.submit %>
+</div>

@@ -1,46 +1,71 @@
-<h1><%= @recipe.name %></h1>
-<% if current_user.id == @recipe.user_id %>
-	<%= link_to 'Edit', edit_recipe_path(@recipe.id) %>
-	<%= link_to 'Delete', destroy_recipe_path(@recipe.id), method: :delete, data: {confirm: "Are you sure?" } %>
-<% else %>
-	<% if Favourite.find_by(recipe_id: @recipe.id, user_id: current_user.id) %>
-		<%= link_to 'Unfollow', favourite_destroy_path(@recipe.id), method: :delete, data: {confirm: "Are you sure?" } %>
-	<% else %>
-		<%= link_to 'Follow', favourite_new_path(@recipe.id), method: "post" %>
+<div class="card width_90 border-primary">
+	<h1><%= @recipe.name %></h1>
+	<% if cookies[:auth_token] %>
+		<% if current_user.id == @recipe.user_id %>
+			<%= link_to 'Edit', edit_recipe_path(@recipe.id) %>
+			<%= link_to 'Delete', destroy_recipe_path(@recipe.id), method: :delete, data: {confirm: "Are you sure?" } %>
+		<% else %>
+			<% if Favourite.find_by(recipe_id: @recipe.id, user_id: current_user.id) %>
+				<%= link_to 'Unfollow', favourite_destroy_path(@recipe.id), method: :delete, data: {confirm: "Are you sure?" } %>
+			<% else %>
+				<%= link_to 'Follow', favourite_new_path(@recipe.id), method: "post" %>
+			<% end %>
+		<% end %>
 	<% end %>
+
+	<p>Overall rating: <%= @recipe.overall_rate %> / 5</p>
+	<p>Favourites: <%= @recipe.favourites_count %></p>
+	<p>Estimated cook time: <%= @recipe.cooktime %></p>
+	<% if @recipe.images %>
+		<img class="card-img-top" src="<%= @recipe.images %>"  alt="Card image cap"%>
+	<% end %>
+	<p><%= sanitize @recipe.description %></p>
+
+	<h3>Ingredients:</h3>
+	<ol>
+		<% @recipe.ingredients.each do |ingredient| %>
+			<li><%= ingredient %></li>
+		<% end %>
+	</ol>
+
+	<h3>Instruction:</h3>
+	<p><%= sanitize @recipe.instruction %></p>
+
+	<h3>Food type</h3>
+	<p>
+		<% @recipe.tags.each do |tag| %>
+			<%= tag %> | 
+		<% end %>
+	</p>
+</div>
+
+<% if @user_review %>
+	<div class="card width_90">
+		<h4>Your Review</h4>
+		<%= link_to 'Edit your Review', edit_review_path(@recipe.id,current_user.id), class: "card-link" %>
+		<%= link_to 'Delete', destroy_review_path(@recipe.id,current_user.id), class: "card-link" , method: :delete, data: {confirm: "Are you sure?" } %>
+		<p><%= @user_review.title %></p>
+		<p>Rating: <%= @user_review.rating %></p>
+		<p><%= sanitize @user_review.description %></p>
+	</div>
 <% end %>
 
-<p>Overall rating: <%= Review.overall_rating(@recipe.id) %> / 5</p>
-<p>Favourites: <%= @recipe.favourites_count %></p>
-<p>Estimated cook time: <%= @recipe.cooktime %></p>
-<% @recipe.images.each do |image| %>
-	<%= image_tag image %>
-<% end %>
-<p><%= sanitize @recipe.description %></p>
-
-<h3>Ingredients:</h3>
-<ol>
-	<% @recipe.ingredients.each do |ingredient| %>
-		<li><%= ingredient %></li>
+<div class="card width_90">
+	<h3>Reviews</h3>
+	<% if cookies[:auth_token] %>
+		<% unless @user_review %>
+			<%= link_to 'Write a Review', new_review_path(@recipe.id) %>
+		<% end %>
 	<% end %>
-</ol>
-
-<h3>Instuction:</h3>
-<p><%= sanitize @recipe.instruction %></p>
-
-<h3>Food type</h3>
-<p>
-	<% @recipe.tags.each do |tag| %>
-		<%= tag %> | 
+	<% line_break = 1 %>
+	<% @review.each do |r| %>
+		<h4><%= r.title %></h4>
+		<p>By: <%= r.user.username %></p>
+		<p>Rating: <%= r.rating %></p>
+		<p><%= sanitize r.description %></p>
+		<% unless line_break == @review.count %>
+			<% line_break += 1 %>
+			<hr>
+		<% end %>
 	<% end %>
-</p>
-
-<hr>
-
-<h3>Reviews</h3>
-<% @review.each do |r| %>
-	<h4><%= r.title %></h4>
-	<p>By: <%= r.user.username %></p>
-	<p>Rating: <%= r.rating %></p>
-	<p><%= r.description %></p>
-<% end %>
+</div>

@@ -6,12 +6,12 @@ $(document).on("turbolinks:load", function(){
   function autocomplete(e){
     e.preventDefault()
     $.ajax({
-      url: '/advance_searching',
+      url: '/searching',
       type: 'POST',
       data: $("#recipe-search").serialize(), //takes the form data and authenticity toke and converts it into a standard URL
       dataType: 'json', //specify what type of data you're expecting back from the servers
       error: function() {
-          console.log("Something went wrong");
+        console.log("Something went wrong");
       },
       success: function(data) {
         $("#list").html("");
@@ -28,6 +28,5 @@ $(document).on("turbolinks:load", function(){
           $("#list").append(option);
         });
       }
-    });
-  }
-})
+    })
+  })

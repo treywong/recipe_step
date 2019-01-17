@@ -8,6 +8,7 @@ class RecipesController < ApplicationController
 		@recipe.ingredients = params[:recipe][:ingredients].split(",")
 		@recipe.tags = params[:recipe][:tags].split(",")
 		@recipe.user_id = current_user.id
+		@recipe.overall_rate = 0
 		if @recipe.save
 			redirect_to user_recipe_path(current_user.id)
 		else
@@ -18,6 +19,12 @@ class RecipesController < ApplicationController
 	def show
 		@recipe = Recipe.find_by(id: params[:id])
 		@review = Review.all.where(recipe_id: params[:id])
+
+		if cookies[:auth_token]
+			if Review.find_by(user_id: current_user.id, recipe_id: @recipe.id)
+				@user_review = Review.find_by(user_id: current_user.id, recipe_id: @recipe.id)
+			end
+		end
 	end
 
 	def index
@@ -38,7 +45,7 @@ class RecipesController < ApplicationController
 		redirect_to "/recipes/#{params[:id]}"
 	end
 
-	def delete
+	def destroy
 		@recipe = Recipe.find_by(id: params[:id])
 		@recipe.destroy
 		redirect_to user_recipe_path(current_user.id)
@@ -64,6 +71,8 @@ class RecipesController < ApplicationController
 	end
 
 	def favourite
+		@user = User.find_by(id: params[:id])
+
 		@recipe = []
 		favourite = Favourite.all.where(user_id: params[:id])
 
@@ -71,6 +80,10 @@ class RecipesController < ApplicationController
 			@recipe << f.recipe
 		end
 
+	end
+
+	def main_page
+		@recipe_ids = Recipe.ids
 	end
 
 	private

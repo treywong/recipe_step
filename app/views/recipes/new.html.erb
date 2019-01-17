@@ -1,4 +1,8 @@
-<h1>Add Your Recipe</h1>
-<%= form_for @recipe, url: {controller: "recipes", action: "create", method: "post" } do |form| %>
-	<%= render partial: '/recipes/form', object: form %>
-<% end %>
+<div class="card width_90 title_card border-primary">
+	<h1>Add Your Recipe</h1>
+</div>
+<div class="card width_90 border-primary">
+	<%= form_for @recipe, url: {controller: "recipes", action: "create", method: "post" } do |form| %>
+		<%= render partial: '/recipes/form', object: form %>
+	<% end %>
+</div>

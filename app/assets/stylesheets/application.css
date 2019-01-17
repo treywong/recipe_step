@@ -14,3 +14,57 @@
  *= require_self
  *= require trix
  */
+
+body {
+  background: repeating-linear-gradient(
+	45deg,
+	#606dbc,
+	#606dbc 10px,
+	#465298 10px,
+	#465298 20px
+  );
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.pages {
+	background: white;
+	width: 45%;
+	margin: auto;
+	margin-top: 10px;
+}
+
+.width_90 {
+	width: 90%;
+	margin: auto;
+	margin-bottom: 10px;
+	padding: 10px;
+}
+
+.width_full {
+	margin-bottom: 10px;
+	padding: 10px;
+}
+
+.title_card {
+	text-align: center
+}
+
+a.custom-card, a.custom-card:hover {
+  color: #212529;
+  text-decoration: none;
+}
+
+.card_box {
+	background-color: white;
+	width: 90%;
+	margin: auto;
+	margin-bottom: 10px;
+	padding: 10px;
+}
+
+.checked {
+  color: orange;
+}

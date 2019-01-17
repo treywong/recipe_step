@@ -1,15 +1,24 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  get 'users/index'
-  root 'users#index'
+  get 'recipes/main_page'
+  root 'recipes#main_page'
 
   resources :recipes, controller: "recipes"
-   get "/users/:id" => "users#show"
+
+  get "/users/:id" => "users#show", as: "user_page"
+
   get "/recipes/user/:id" => "recipes#user_recipe", as: "user_recipe"
   get "/recipes/favourite/user/:id" => "recipes#favourite", as: "favourite_recipe"
   post "/favourite/:id" => "recipes#favourite_new", as: "favourite_new"
   delete "/favourite/:id" => "recipes#favourite_destroy", as: "favourite_destroy"
   delete "/recipes/:id" => "recipes#destroy", as: "destroy_recipe"
+  
+  get "/recipes/:recipe_id/review" => "reviews#new", as: "new_review"
+  post "/recipes/:recipe_id/review" => "reviews#create"
+  get  "/recipes/:recipe_id/review/user/:user_id" => "reviews#edit", as: "edit_review"
+  put "/recipes/:recipe_id/review/user/:user_id" => "reviews#update"
+  patch "/recipes/:recipe_id/review/user/:user_id" => "reviews#update"
+  delete "/recipes/:recipe_id/review/user/:user_id" => "reviews#destroy", as: "destroy_review"
 
   get "/search" => "searches#_search", as: "searching"
   get "/advance_search" => "searches#advance_search"
